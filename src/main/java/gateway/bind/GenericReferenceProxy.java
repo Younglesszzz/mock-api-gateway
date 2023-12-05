@@ -19,7 +19,11 @@ public class GenericReferenceProxy implements MethodInterceptor {
 
     @Override
     public Object intercept(Object o, Method method, Object[] args, MethodProxy methodProxy) throws Throwable {
-//        return genericService.$invoke(genericCallMethodName, paramters, args);
-        return null;
+        Class<?>[] parameterTypes = method.getParameterTypes();
+        String[] parametersTypeName = new String[parameterTypes.length];
+        for (int i = 0; i < parameterTypes.length; i++) {
+            parametersTypeName[i] = parameterTypes[i].getName();
+        }
+        return genericService.$invoke(genericCallMethodName, parametersTypeName, args);
     }
 }
